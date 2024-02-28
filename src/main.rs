@@ -76,10 +76,10 @@ mod serde_ord_map {
                 None => Vec::new(),
                 Some(l) => Vec::with_capacity(l),
             };
-            while let Some(key) = map.next_key::<&str>()? {
+            while let Some(key) = map.next_key::<String>()? {
                 let value = map.next_value()?;
                 v.push((
-                    K::deserialize_key(key).map_err(serde::de::Error::custom)?,
+                    K::deserialize_key(&key).map_err(serde::de::Error::custom)?,
                     value,
                 ));
             }
